@@ -63,17 +63,17 @@ public class Platform : MonoBehaviour, IPlatform
 
     void CheckPossibleSprites()
     {
-        if (upPlatform != null && downPlatform != null)
-            possibleSprites.Add(listAllSprites[1]);
-
-        if (rightPlatform != null && downPlatform != null)
-            possibleSprites.Add(listAllSprites[3]);
-
         if (rightPlatform != null && leftPlatform != null)
             possibleSprites.Add(listAllSprites[0]);
 
+        if (upPlatform != null && downPlatform != null)
+            possibleSprites.Add(listAllSprites[1]);
+
         if (leftPlatform != null && downPlatform != null)
             possibleSprites.Add(listAllSprites[2]);
+
+        if (rightPlatform != null && downPlatform != null)
+            possibleSprites.Add(listAllSprites[3]);
 
         if (upPlatform != null && leftPlatform != null)
             possibleSprites.Add(listAllSprites[4]);
