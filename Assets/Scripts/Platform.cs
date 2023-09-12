@@ -26,16 +26,16 @@ public class Platform : MonoBehaviour, IPlatform
     void DetectNearbyPlatforms()
     {
         //cast raycast in all directions
-        RaycastHit2D hitUp = Physics2D.Raycast(transform.position, transform.TransformDirection(Vector2.up), raycastDistance);
-        RaycastHit2D hitDown = Physics2D.Raycast(transform.position, transform.TransformDirection(Vector2.down), raycastDistance);
-        RaycastHit2D hitRight = Physics2D.Raycast(transform.position, transform.TransformDirection(Vector2.right), raycastDistance);
-        RaycastHit2D hitLeft = Physics2D.Raycast(transform.position, transform.TransformDirection(Vector2.left), raycastDistance);
+        RaycastHit2D hitUp = Physics2D.Raycast(transform.position, Vector2.up, raycastDistance);
+        RaycastHit2D hitDown = Physics2D.Raycast(transform.position, Vector2.down, raycastDistance);
+        RaycastHit2D hitRight = Physics2D.Raycast(transform.position, Vector2.right, raycastDistance);
+        RaycastHit2D hitLeft = Physics2D.Raycast(transform.position, Vector2.left, raycastDistance);
 
         //show the ray
-        Debug.DrawRay(transform.position, transform.TransformDirection(Vector2.up) * raycastDistance, Color.red, 5f);
-        Debug.DrawRay(transform.position, transform.TransformDirection(Vector2.down) * raycastDistance, Color.red, 5f);
-        Debug.DrawRay(transform.position, transform.TransformDirection(Vector2.right) * raycastDistance, Color.red, 5f);
-        Debug.DrawRay(transform.position, transform.TransformDirection(Vector2.left) * raycastDistance, Color.red, 5f);
+        Debug.DrawRay(transform.position, Vector2.up * raycastDistance, Color.red, 5f);
+        Debug.DrawRay(transform.position, Vector2.down * raycastDistance, Color.red, 5f);
+        Debug.DrawRay(transform.position, Vector2.right * raycastDistance, Color.red, 5f);
+        Debug.DrawRay(transform.position, Vector2.left * raycastDistance, Color.red, 5f);
 
         //get the surrounding object  
         if (hitUp.collider != null && hitUp.collider.gameObject != this.gameObject)
