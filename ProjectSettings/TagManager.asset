@@ -41,3 +41,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Platforms
+    uniqueID: 1591068101
+    locked: 0
+  - name: Trains
+    uniqueID: 1624055463
+    locked: 0
