@@ -47,7 +47,7 @@ public class Platform : MonoBehaviour, IPlatform
         Debug.DrawRay(transform.position, Vector2.right * raycastDistance, Color.red, 5f);
         Debug.DrawRay(transform.position, Vector2.left * raycastDistance, Color.red, 5f);
 
-        //get the surrounding object  
+        //get the surrounding object - if hit something and its not itself 
         if (hitUp.collider != null && hitUp.collider.gameObject != this.gameObject)
             upPlatform = hitUp.collider.gameObject;
 
@@ -63,6 +63,7 @@ public class Platform : MonoBehaviour, IPlatform
 
     void CheckPossibleSprites()
     {
+        //if there are right and left neighbours, add certain sprite to list
         if (rightPlatform != null && leftPlatform != null)
             possibleSprites.Add(listAllSprites[0]);
 
