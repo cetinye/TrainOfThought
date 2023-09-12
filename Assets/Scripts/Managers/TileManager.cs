@@ -20,11 +20,11 @@ public class TileManager : MonoBehaviour
     void Update()
     {
         // Clone object on mouse click at the mouse position
-        if (Input.GetMouseButtonDown(0))
-        {
-            Vector3 mp = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            location = tileMap.WorldToCell(mp);
-            Instantiate(tile, location, Quaternion.identity);
-        }
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    Vector3 mp = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //    location = tileMap.WorldToCell(mp);
+        //    Instantiate(tile, location, Quaternion.identity);
+        //}
     }
 }

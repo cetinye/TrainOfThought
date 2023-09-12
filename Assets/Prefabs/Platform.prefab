@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5409174592428489253}
   - component: {fileID: 1026606430687037728}
   m_Layer: 0
-  m_Name: CircleStraight
+  m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,12 +75,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: eec237780bfcc6d4daa2ceb5f98ea550, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9aebd705574f9e642aef1e5f59b3e4d8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.16, y: 0.16}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -103,6 +103,15 @@ MonoBehaviour:
   rightPlatform: {fileID: 0}
   leftPlatform: {fileID: 0}
   raycastDistance: 1
+  listAllSprites:
+  - {fileID: 21300000, guid: eec237780bfcc6d4daa2ceb5f98ea550, type: 3}
+  - {fileID: 21300000, guid: f51e1eb45dbbd7f41b0b38371e470a6b, type: 3}
+  - {fileID: 21300000, guid: ee9f45c58b618d54e9b3c9edf778156c, type: 3}
+  - {fileID: 21300000, guid: 096e84c6d37af0e42bb6ae327e9bbf75, type: 3}
+  - {fileID: 21300000, guid: ca34e318b69ab7f4685bc11552edfe05, type: 3}
+  - {fileID: 21300000, guid: 260a9fca834c2de4b9f728f7e203078b, type: 3}
+  possibleSprites: []
+  tapCount: 0
 --- !u!58 &1026606430687037728
 CircleCollider2D:
   m_ObjectHideFlags: 0

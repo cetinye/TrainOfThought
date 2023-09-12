@@ -12,15 +12,25 @@ public class Platform : MonoBehaviour, IPlatform
 
     public float raycastDistance = 1;
 
+    public List<Sprite> listAllSprites = new List<Sprite>();
+    public List<Sprite> possibleSprites = new List<Sprite>();
+
+    public int tapCount = 1;
+
     private void Start()
     {
         Debug.Log("New platform created");
+
         DetectNearbyPlatforms();
+        CheckPossibleSprites();
     }
 
     public void Tapped()
     {
+        tapCount++;
         Debug.Log("Tapped on a platform");
+
+        this.GetComponent<SpriteRenderer>().sprite = possibleSprites[tapCount % possibleSprites.Count];
     }
 
     void DetectNearbyPlatforms()
@@ -49,5 +59,26 @@ public class Platform : MonoBehaviour, IPlatform
 
         if (hitLeft.collider != null && hitLeft.collider.gameObject != this.gameObject)
             leftPlatform = hitLeft.collider.gameObject;
+    }
+
+    void CheckPossibleSprites()
+    {
+        if (upPlatform != null && downPlatform != null)
+            possibleSprites.Add(listAllSprites[1]);
+
+        if (rightPlatform != null && downPlatform != null)
+            possibleSprites.Add(listAllSprites[3]);
+
+        if (rightPlatform != null && leftPlatform != null)
+            possibleSprites.Add(listAllSprites[0]);
+
+        if (leftPlatform != null && downPlatform != null)
+            possibleSprites.Add(listAllSprites[2]);
+
+        if (upPlatform != null && leftPlatform != null)
+            possibleSprites.Add(listAllSprites[4]);
+
+        if (upPlatform != null && rightPlatform != null)
+            possibleSprites.Add(listAllSprites[5]);
     }
 }
