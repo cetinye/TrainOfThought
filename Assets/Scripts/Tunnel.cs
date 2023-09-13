@@ -11,10 +11,15 @@ public class Tunnel : MonoBehaviour
     public float timeToWaitBeforeSpawn;
 
     private GameObject spawnedTrain;
+    private Color colorTrain;
+    private Color colorVagon;
+    private int index = 0;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        index = 0;
         SpawnTrains();
     }
 
@@ -29,12 +34,23 @@ public class Tunnel : MonoBehaviour
 
         for (int i = 0; i < amountOfTrains; i++)
         {
-            spawnedTrain = Instantiate(train, transform.position, Quaternion.identity);
+            spawnedTrain = GameObject.Instantiate(train, transform.position, Quaternion.identity) as GameObject;
             //align train with tunnel
             spawnedTrain.transform.rotation = this.transform.rotation;
+            ColorTrain(spawnedTrain);
             yield return new WaitForSeconds(timeBetweenTrains);
         }
 
         yield return null;
+    }
+
+    void ColorTrain(GameObject sTrain)
+    {
+        colorTrain = LevelManager.instance.Stations[index].GetComponent<Station>().colorHouse;
+        colorVagon = LevelManager.instance.Stations[index].GetComponent<Station>().colorRoof;
+        index++;
+
+        sTrain.transform.GetChild(0).GetComponent<Renderer>().material.color = colorTrain;
+        sTrain.transform.GetChild(1).GetComponent<Renderer>().material.color = colorVagon;
     }
 }
