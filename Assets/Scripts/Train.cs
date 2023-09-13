@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UIElements;
 
 public class Train : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class Train : MonoBehaviour
     public PathType pathType;
     public PathMode pathMode;
     public float raycastDistance = 0.5f;
+    public GameObject previousPlatform;
+    public GameObject temp;
 
     // Start is called before the first frame update
     void Start()
@@ -22,11 +25,12 @@ public class Train : MonoBehaviour
         //    platformArr[i] = platforms.GetChild(i).position;
         //}
         //transform.DOPath(platformArr, duration, pathType, pathMode).SetLookAt(0.0001f);
-
+        previousPlatform = GameObject.FindGameObjectWithTag("Tunnel");
+        temp = GameObject.FindGameObjectWithTag("Tunnel");
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         //cast ray in front
         RaycastHit2D hitFront = Physics2D.Raycast(transform.position, transform.TransformDirection(Vector2.right), raycastDistance);
@@ -49,8 +53,8 @@ public class Train : MonoBehaviour
         if (currentPlatform.GetComponent<SpriteRenderer>().sprite == 
             currentPlatform.GetComponent<Platform>().listAllSprites[0]) 
         {
-            if (transform.position.x - 
-                currentPlatform.GetComponent<Platform>().leftPlatform.transform.position.x < 0)
+            if (previousPlatform.transform.position.x < 
+                currentPlatform.GetComponent<Platform>().transform.position.x)
                     platformArr[0] = currentPlatform.GetComponent<Platform>().rightPlatform.transform.position;
             else
                 platformArr[0] = currentPlatform.GetComponent<Platform>().leftPlatform.transform.position;
@@ -59,7 +63,7 @@ public class Train : MonoBehaviour
         if (currentPlatform.GetComponent<SpriteRenderer>().sprite ==
             currentPlatform.GetComponent<Platform>().listAllSprites[1])
         {
-            if (transform.position.y - 
+            if (previousPlatform.transform.position.y - 
                 currentPlatform.GetComponent<Platform>().transform.position.y > 0)
                     platformArr[0] = currentPlatform.GetComponent<Platform>().downPlatform.transform.position;
             else
@@ -69,18 +73,18 @@ public class Train : MonoBehaviour
         if (currentPlatform.GetComponent<SpriteRenderer>().sprite ==
             currentPlatform.GetComponent<Platform>().listAllSprites[2])
         {
-            if (transform.position.x -
-                currentPlatform.GetComponent<Platform>().leftPlatform.transform.position.x < 0)
-                    platformArr[0] = currentPlatform.GetComponent<Platform>().downPlatform.transform.position;
+            if (previousPlatform.transform.position.y !=
+                currentPlatform.GetComponent<Platform>().transform.position.y)
+                    platformArr[0] = currentPlatform.GetComponent<Platform>().leftPlatform.transform.position;
             else
-                platformArr[0] = currentPlatform.GetComponent<Platform>().leftPlatform.transform.position;
+                platformArr[0] = currentPlatform.GetComponent<Platform>().downPlatform.transform.position;
         }
 
         if (currentPlatform.GetComponent<SpriteRenderer>().sprite ==
             currentPlatform.GetComponent<Platform>().listAllSprites[3])
         {
-            if (transform.position.x -
-                currentPlatform.GetComponent<Platform>().leftPlatform.transform.position.x > 0)
+            if (previousPlatform.transform.position.x -
+                currentPlatform.GetComponent<Platform>().transform.position.x > 0)
                     platformArr[0] = currentPlatform.GetComponent<Platform>().downPlatform.transform.position;
             else
                 platformArr[0] = currentPlatform.GetComponent<Platform>().rightPlatform.transform.position;
@@ -89,7 +93,7 @@ public class Train : MonoBehaviour
         if (currentPlatform.GetComponent<SpriteRenderer>().sprite ==
             currentPlatform.GetComponent<Platform>().listAllSprites[4])
         {
-            if (transform.position.y -
+            if (previousPlatform.transform.position.y -
                 currentPlatform.GetComponent<Platform>().transform.position.y > 0)
                     platformArr[0] = currentPlatform.GetComponent<Platform>().leftPlatform.transform.position;
             else
@@ -99,11 +103,17 @@ public class Train : MonoBehaviour
         if (currentPlatform.GetComponent<SpriteRenderer>().sprite ==
             currentPlatform.GetComponent<Platform>().listAllSprites[5])
         {
-            if (transform.position.y -
-                currentPlatform.GetComponent<Platform>().upPlatform.transform.position.y > 0)
-                    platformArr[0] = currentPlatform.GetComponent<Platform>().rightPlatform.transform.position;
+            if (temp.transform.position.y -
+                currentPlatform.GetComponent<Platform>().transform.position.y == 0)
+                    platformArr[0] = currentPlatform.GetComponent<Platform>().upPlatform.transform.position;
             else
-                platformArr[0] = currentPlatform.GetComponent<Platform>().upPlatform.transform.position;
+                platformArr[0] = currentPlatform.GetComponent<Platform>().rightPlatform.transform.position;
+        }
+
+        if (currentPlatform != temp)
+        {
+            previousPlatform = temp;
+            temp = currentPlatform;
         }
     }
 }
