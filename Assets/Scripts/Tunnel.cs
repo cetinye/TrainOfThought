@@ -6,19 +6,26 @@ using UnityEngine;
 public class Tunnel : MonoBehaviour
 {
     public GameObject train;
-    public int amountOfTrains;
-    public float timeBetweenTrains;
-    public float timeToWaitBeforeSpawn;
 
+    private int amountOfTrains;
+    private float timeBetweenTrains;
+    private float timeToWaitBeforeSpawn;
     private GameObject spawnedTrain;
     private Color colorTrain;
     private Color colorVagon;
     private int index = 0;
 
+    private LevelManager levelManager;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        levelManager = LevelManager.instance;
+        amountOfTrains = levelManager.amountOfTrains;
+        timeBetweenTrains = levelManager.timeBetweenTrains;
+        timeToWaitBeforeSpawn = levelManager.timeToWaitBeforeSpawn;
+
         index = 0;
         SpawnTrains();
     }
