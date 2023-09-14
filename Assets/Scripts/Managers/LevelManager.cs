@@ -23,10 +23,4 @@ public class LevelManager : MonoBehaviour
 
         Stations = GameObject.FindGameObjectsWithTag("Station");
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

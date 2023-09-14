@@ -22,6 +22,7 @@ public class Tunnel : MonoBehaviour
     void Start()
     {
         levelManager = LevelManager.instance;
+
         amountOfTrains = levelManager.amountOfTrains;
         timeBetweenTrains = levelManager.timeBetweenTrains;
         timeToWaitBeforeSpawn = levelManager.timeToWaitBeforeSpawn;
@@ -53,6 +54,7 @@ public class Tunnel : MonoBehaviour
 
     void ColorTrain(GameObject sTrain)
     {
+        //apply statin colors to trains
         colorTrain = LevelManager.instance.Stations[index].GetComponent<Station>().colorHouse;
         colorVagon = LevelManager.instance.Stations[index].GetComponent<Station>().colorRoof;
         index++;

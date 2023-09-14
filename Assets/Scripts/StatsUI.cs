@@ -40,10 +40,12 @@ public class StatsUI : MonoBehaviour
 
     private void UpdateTime()
     {
+        //timer continue if game is playing
         if (timeRemaining > 0 && gameManager.state == GameManager.GameState.Playing)
         {
             timeRemaining -= Time.deltaTime;
         }
+        //stop timer if time ran out
         else if (timeRemaining <= 0 && gameManager.state == GameManager.GameState.Playing)
         {
             gameManager.state = GameManager.GameState.Failed;
@@ -53,6 +55,7 @@ public class StatsUI : MonoBehaviour
         minutes = Mathf.FloorToInt(timeRemaining / 60);
         seconds = Mathf.FloorToInt(timeRemaining % 60);
 
+        //make timer in 0:00 format
         time.text = "TIME " + string.Format("{0:0}:{1:00}", minutes, seconds);
     }
 

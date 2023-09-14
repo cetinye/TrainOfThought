@@ -19,8 +19,6 @@ public class Platform : MonoBehaviour, IPlatform
 
     private void Start()
     {
-        Debug.Log("New platform created");
-
         DetectNearbyPlatforms();
         CheckPossibleSprites();
     }
@@ -28,8 +26,7 @@ public class Platform : MonoBehaviour, IPlatform
     public void Tapped()
     {
         tapCount++;
-        Debug.Log("Tapped on a platform");
-
+        //change platform sprite
         this.GetComponent<SpriteRenderer>().sprite = possibleSprites[tapCount % possibleSprites.Count];
     }
 

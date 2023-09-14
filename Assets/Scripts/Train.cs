@@ -47,12 +47,13 @@ public class Train : MonoBehaviour
 
         DetectRoute();
 
-        //make train look forward
+        //make train follow the path
         transform.DOPath(platformArr, 5f, pathType, pathMode).SetLookAt(0.0001f);
     }
 
     void DetectRoute()
     {
+        //check platforms sprite regarding with trains coming direction and assign required platform to route array
         if (currentPlatform.GetComponent<SpriteRenderer>().sprite == 
             currentPlatform.GetComponent<Platform>().listAllSprites[0]) 
         {

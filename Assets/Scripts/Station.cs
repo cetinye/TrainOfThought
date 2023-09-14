@@ -14,17 +14,12 @@ public class Station : MonoBehaviour
     {
         gameManager = GameManager.instance;
 
+        //get random colors and paint station
         colorRoof = Random.ColorHSV();
         colorHouse = Random.ColorHSV();
 
         transform.GetChild(0).GetComponent<SpriteRenderer>().color = colorRoof;
         transform.GetChild(1).GetComponent<SpriteRenderer>().color = colorHouse;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -37,6 +32,7 @@ public class Station : MonoBehaviour
 
     private void CheckColor(GameObject train)
     {
+        //check if train has the same color with the statino
         if(train.transform.GetChild(0).GetComponent<Renderer>().material.color == colorHouse 
             && train.transform.GetChild(1).GetComponent<Renderer>().material.color == colorRoof)
         {

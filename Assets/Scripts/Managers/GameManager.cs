@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
             state = GameState.Success;
         }
         
-        if (correctScore + failScore == LevelManager.instance.amountOfTrains)
+        else if (correctScore + failScore == LevelManager.instance.amountOfTrains)
         {
             state = GameState.Failed;
         }
