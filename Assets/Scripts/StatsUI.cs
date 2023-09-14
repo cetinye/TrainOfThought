@@ -8,11 +8,14 @@ using UnityEngine.SceneManagement;
 public class StatsUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI time;
+    [SerializeField] private TextMeshProUGUI levelId;
     [SerializeField] private TextMeshProUGUI score;
+    [SerializeField] private TextMeshProUGUI countdownText;
     [SerializeField] private GameObject sucessScreen;
     [SerializeField] private GameObject failScreen;
+    [SerializeField] private float timeRemaining = 2;
+    [SerializeField] private int countdownTime = 3;
 
-    public float timeRemaining = 2;
 
     private GameManager gameManager;
 
@@ -23,6 +26,11 @@ public class StatsUI : MonoBehaviour
     void Start()
     {
         gameManager = GameManager.instance;
+
+        levelId.text = "Level: " + LevelManager.instance.levelId;
+
+        countdownTime = LevelManager.instance.timeToWaitBeforeStart;
+        StartCoroutine(StartCountdown());
     }
 
     // Update is called once per frame
@@ -86,6 +94,22 @@ public class StatsUI : MonoBehaviour
 
     public void Restart()
     {
+        levelId.text = "Level: " + LevelManager.instance.levelId;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    IEnumerator StartCountdown()
+    {
+        while (countdownTime > 0)
+        {
+            countdownText.text = countdownTime.ToString();
+            yield return new WaitForSeconds(1f);
+            countdownTime--;
+        }
+
+        countdownText.text = "GO !";
+        GameManager.instance.state = GameManager.GameState.Playing;
+        yield return new WaitForSeconds(0.5f);
+        countdownText.gameObject.SetActive(false);
     }
 }

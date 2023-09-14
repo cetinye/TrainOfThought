@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Tunnel : MonoBehaviour
 {
-    public GameObject train;
+    [SerializeField] private GameObject train;
 
     private int amountOfTrains;
     private float timeBetweenTrains;
@@ -25,7 +25,7 @@ public class Tunnel : MonoBehaviour
 
         amountOfTrains = levelManager.stationCount;
         timeBetweenTrains = levelManager.timeBetweenTrains;
-        timeToWaitBeforeSpawn = levelManager.timeToWaitBeforeSpawn;
+        timeToWaitBeforeSpawn = levelManager.timeToWaitBeforeSpawn + levelManager.timeToWaitBeforeStart;
 
         index = 0;
         SpawnTrains();

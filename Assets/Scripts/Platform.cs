@@ -10,12 +10,12 @@ public class Platform : MonoBehaviour, IPlatform
     public GameObject rightPlatform;
     public GameObject leftPlatform;
 
-    public float raycastDistance = 1;
+    [SerializeField] private float raycastDistance = 1;
 
     public List<Sprite> listAllSprites = new List<Sprite>();
     public List<Sprite> possibleSprites = new List<Sprite>();
 
-    public int tapCount = 1;
+    [SerializeField] private int tapCount = 1;
 
     private void Start()
     {
@@ -25,9 +25,13 @@ public class Platform : MonoBehaviour, IPlatform
 
     public void Tapped()
     {
-        tapCount++;
-        //change platform sprite
-        this.GetComponent<SpriteRenderer>().sprite = possibleSprites[tapCount % possibleSprites.Count];
+        if (GameManager.instance.state == GameManager.GameState.Playing)
+        {
+            tapCount++;
+            //change platform sprite
+            this.GetComponent<SpriteRenderer>().sprite = possibleSprites[tapCount % possibleSprites.Count];
+        }
+        
     }
 
     void DetectNearbyPlatforms()

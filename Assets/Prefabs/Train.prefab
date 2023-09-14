@@ -59,7 +59,7 @@ MonoBehaviour:
   duration: 360
   pathType: 1
   pathMode: 2
-  raycastDistance: 0.1
+  raycastDistance: 0.2
   previousPlatform: {fileID: 0}
   tempPlatform: {fileID: 0}
   rayDistFlag: 1

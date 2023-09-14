@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,10 +13,13 @@ public class LevelManager : MonoBehaviour
     public int stationCount;
     public float timeBetweenTrains;
     public float timeToWaitBeforeSpawn;
-    public GameObject platform1;
-    public GameObject station2;
-    public GameObject tunnel3;
-    public GameObject levelParent;
+    public int timeToWaitBeforeStart = 3;
+
+    [SerializeField] private GameObject platform1;
+    [SerializeField] private GameObject station2;
+    [SerializeField] private GameObject tunnel3;
+    [SerializeField] private GameObject levelParent;
+    
     public GameObject[] Stations;
 
     private Vector3 startingPos;

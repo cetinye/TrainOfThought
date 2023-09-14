@@ -3,20 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UIElements;
+using static UnityEngine.GraphicsBuffer;
 
 public class Train : MonoBehaviour
 {
-    public GameObject currentPlatform;
-    public Transform platforms;
-    public Vector3[] platformArr = new Vector3[1];
-    public float duration;
-    public PathType pathType;
-    public PathMode pathMode;
-    public float raycastDistance;
-    public GameObject previousPlatform;
-    public GameObject tempPlatform;
+    [SerializeField] private float moveDuration = 3f;
+    [SerializeField] private GameObject currentPlatform;
+    [SerializeField] private Transform platforms;
+    [SerializeField] private Vector3[] platformArr = new Vector3[1];
+    [SerializeField] private float duration;
+    [SerializeField] private PathType pathType;
+    [SerializeField] private PathMode pathMode;
+    [SerializeField] private float raycastDistance;
+    [SerializeField] private GameObject previousPlatform;
+    [SerializeField] private GameObject tempPlatform;
 
-    public bool rayDistFlag = true;
+    //public bool rayDistFlag = true;
     //private float tempDist;
 
     // Start is called before the first frame update
@@ -29,7 +31,7 @@ public class Train : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         //to detect front platform on spawn change ray distance
         //raycastDistance = (rayDistFlag) ? 0.5f : tempDist;
@@ -42,12 +44,15 @@ public class Train : MonoBehaviour
         
         if (hitFront.collider != null && 
                 hitFront.collider.gameObject.TryGetComponent<IPlatform>(out IPlatform iPlatform))
-            currentPlatform = hitFront.collider.gameObject;
+                    currentPlatform = hitFront.collider.gameObject;
 
         DetectRoute();
 
         //make train follow the path
-        transform.DOPath(platformArr, 5f, pathType, pathMode).SetLookAt(0.0001f);
+        //transform.DOPath(platformArr, 5f, pathType, pathMode).SetLookAt(0.0001f);
+
+        transform.DOMove(platformArr[0], moveDuration, false);
+        transform.right = platformArr[0] - transform.position;
     }
 
     void DetectRoute()
@@ -126,10 +131,10 @@ public class Train : MonoBehaviour
         tempPlatform = GameObject.FindGameObjectWithTag("Tunnel");
 
         //cast raycast in all directions
-        RaycastHit2D hitUp = Physics2D.Raycast(transform.position, Vector2.up, 5f);
-        RaycastHit2D hitDown = Physics2D.Raycast(transform.position, Vector2.down, 5f);
-        RaycastHit2D hitRight = Physics2D.Raycast(transform.position, Vector2.right, 5f);
-        RaycastHit2D hitLeft = Physics2D.Raycast(transform.position, Vector2.left, 5f);
+        RaycastHit2D hitUp = Physics2D.Raycast(transform.position, Vector2.up, 1f);
+        RaycastHit2D hitDown = Physics2D.Raycast(transform.position, Vector2.down, 1f);
+        RaycastHit2D hitRight = Physics2D.Raycast(transform.position, Vector2.right, 1f);
+        RaycastHit2D hitLeft = Physics2D.Raycast(transform.position, Vector2.left, 1f);
 
         if (hitUp.collider != null &&
                 hitUp.collider.gameObject.TryGetComponent<IPlatform>(out IPlatform iUPlatform))
