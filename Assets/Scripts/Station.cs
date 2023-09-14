@@ -7,13 +7,9 @@ public class Station : MonoBehaviour
     public Color colorRoof;
     public Color colorHouse;
 
-    private GameManager gameManager;
-
     // Start is called before the first frame update
     void Awake()
     {
-        gameManager = GameManager.instance;
-
         //get random colors and paint station
         colorRoof = Random.ColorHSV();
         colorHouse = Random.ColorHSV();
@@ -36,15 +32,15 @@ public class Station : MonoBehaviour
         if(train.transform.GetChild(0).GetComponent<Renderer>().material.color == colorHouse 
             && train.transform.GetChild(1).GetComponent<Renderer>().material.color == colorRoof)
         {
+            GameManager.instance.correctScore++;
+            GameManager.instance.CheckGameStatus();
             train.gameObject.SetActive(false);
-            gameManager.correctScore++;
-            gameManager.CheckGameStatus();
         }
         else
         {
-            gameManager.failScore++;
+            GameManager.instance.failScore++;
+            GameManager.instance.CheckGameStatus();
             train.gameObject.SetActive(false);
-            gameManager.CheckGameStatus();
         }
     }
 }

@@ -23,7 +23,7 @@ public class Tunnel : MonoBehaviour
     {
         levelManager = LevelManager.instance;
 
-        amountOfTrains = levelManager.amountOfTrains;
+        amountOfTrains = levelManager.stationCount;
         timeBetweenTrains = levelManager.timeBetweenTrains;
         timeToWaitBeforeSpawn = levelManager.timeToWaitBeforeSpawn;
 

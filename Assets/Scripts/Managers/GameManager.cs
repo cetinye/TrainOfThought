@@ -30,6 +30,9 @@ public class GameManager : MonoBehaviour
     {
         if (correctScore == LevelManager.instance.amountOfTrains)
         {
+            int levelId = LevelManager.instance.levelId;
+            LevelManager.instance.levelId = levelId + 1;
+            PlayerPrefs.SetInt("level", LevelManager.instance.levelId);
             state = GameState.Success;
         }
         

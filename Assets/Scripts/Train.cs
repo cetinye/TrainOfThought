@@ -17,15 +17,14 @@ public class Train : MonoBehaviour
     public GameObject tempPlatform;
 
     public bool rayDistFlag = true;
-    private float tempDist;
+    //private float tempDist;
 
     // Start is called before the first frame update
     void Start()
     {
-        tempDist = raycastDistance;
+        //tempDist = raycastDistance;
 
-        previousPlatform = GameObject.FindGameObjectWithTag("Tunnel");
-        tempPlatform = GameObject.FindGameObjectWithTag("Tunnel");
+        FindPlatform();
 
     }
 
@@ -33,8 +32,8 @@ public class Train : MonoBehaviour
     void FixedUpdate()
     {
         //to detect front platform on spawn change ray distance
-        raycastDistance = (rayDistFlag) ? 0.5f : tempDist;
-        rayDistFlag = false;
+        //raycastDistance = (rayDistFlag) ? 0.5f : tempDist;
+        //rayDistFlag = false;
 
         //cast ray in front
         RaycastHit2D hitFront = Physics2D.Raycast(transform.position, transform.TransformDirection(Vector2.right), raycastDistance);
@@ -119,5 +118,34 @@ public class Train : MonoBehaviour
             previousPlatform = tempPlatform;
             tempPlatform = currentPlatform;
         }
+    }
+
+    void FindPlatform()
+    {
+        previousPlatform = GameObject.FindGameObjectWithTag("Tunnel");
+        tempPlatform = GameObject.FindGameObjectWithTag("Tunnel");
+
+        //cast raycast in all directions
+        RaycastHit2D hitUp = Physics2D.Raycast(transform.position, Vector2.up, 5f);
+        RaycastHit2D hitDown = Physics2D.Raycast(transform.position, Vector2.down, 5f);
+        RaycastHit2D hitRight = Physics2D.Raycast(transform.position, Vector2.right, 5f);
+        RaycastHit2D hitLeft = Physics2D.Raycast(transform.position, Vector2.left, 5f);
+
+        if (hitUp.collider != null &&
+                hitUp.collider.gameObject.TryGetComponent<IPlatform>(out IPlatform iUPlatform))
+                    currentPlatform = hitUp.collider.gameObject;
+
+        else if (hitDown.collider != null &&
+                    hitDown.collider.gameObject.TryGetComponent<IPlatform>(out IPlatform iDPlatform))
+                        currentPlatform = hitDown.collider.gameObject;
+
+        else if (hitRight.collider != null &&
+                    hitRight.collider.gameObject.TryGetComponent<IPlatform>(out IPlatform iRPlatform))
+                        currentPlatform = hitRight.collider.gameObject;
+
+        else if (hitLeft.collider != null &&
+                    hitLeft.collider.gameObject.TryGetComponent<IPlatform>(out IPlatform iLPlatform))
+                        currentPlatform = hitLeft.collider.gameObject;
+
     }
 }
